@@ -19,7 +19,7 @@ Crafty.scene('Game', function() {
 	// Place a tree at every edge square on our grid of 16x16 tiles
 	for (var x = 0; x < Game.map_grid.width; x++) {
 		for (var y = 0; y < Game.map_grid.height; y++) {
-			var at_edge = x == 0 || x == Game.map_grid.width - 1 || y == 0 || y == Game.map_grid.height - 1;
+			var at_edge = x === 0 || x === Game.map_grid.width - 1 || y === 0 || y === Game.map_grid.height - 1;
 
 			if (at_edge) {
 				// Place a tree entity at the current tile
@@ -68,6 +68,9 @@ Crafty.scene('Victory', function() {
 		.attr({ x: 0, y: 0 })
 		.text('Victory!');
 
+                Crafty.audio.play('cheer');
+                
+
 	// Watch for the player to press a key, then restart the game
 	//  when a key is pressed
 	this.restart_game = this.bind('KeyDown', function() {
@@ -84,8 +87,9 @@ Crafty.scene('Victory', function() {
 // -------------
 // Handles the loading of binary assets such as images and audio files
 Crafty.scene('Loading', function(){
+        //uh, why load the sound files here? without this, the sounds won't repeat... hmm... 
 	// Load our sprite map image
-	Crafty.load(['http://desolate-caverns-4829.herokuapp.com/assets/16x16_forest_1.gif', 'http://desolate-caverns-4829.herokuapp.com/assets/hunter.png', 'http://desolate-caverns-4829.herokuapp.com/assets/door_knock_3x.mp3', 'http://desolate-caverns-4829.herokuapp.com/assets/door_knock_3x.ogg', 'http://desolate-caverns-4829.herokuapp.com/assets/door_knock_3x.aac'], function(){
+	Crafty.load(['assets/16x16_forest_1.gif', 'assets/hunter.png', 'assets/door_knock_3x.mp3', 'assets/door_knock_3x.ogg', 'assets/door_knock_3x.aac'], function(){
 		// Once the images are loaded...
 
 		// Define the individual sprites in the image
@@ -93,7 +97,7 @@ Crafty.scene('Loading', function(){
 		// These components' names are prefixed with "spr_"
 		//  to remind us that they simply cause the entity
 		//  to be drawn with a certain sprite
-		Crafty.sprite(16, 'http://desolate-caverns-4829.herokuapp.com/assets/16x16_forest_1.gif', {
+		Crafty.sprite(16, 'assets/16x16_forest_1.gif', {
 			spr_tree:    [0, 0],
 			spr_bush:    [1, 0],
 			spr_village: [0, 1]
@@ -101,13 +105,17 @@ Crafty.scene('Loading', function(){
 
 		// Define the PC's sprite to be the first sprite in the third row of the
 		//  animation sprite map
-		Crafty.sprite(16, 'http://desolate-caverns-4829.herokuapp.com/assets/hunter.png', {
+		Crafty.sprite(16, 'assets/hunter.png', {
 			spr_player:  [0, 2]
 		}, 0, 2);
 
 		// Define our sounds for later use
 		Crafty.audio.add({
-			knock: ['http://desolate-caverns-4829.herokuapp.com/assets/door_knock_3x.mp3']
+			knock: ['assets/door_knock_3x.mp3']
+		});
+                
+		Crafty.audio.add({
+			cheer: ['assets/board_room_applause.mp3']
 		});
 
 		// Draw some text for the player to see in case the file
