@@ -102,13 +102,13 @@ Crafty.scene('Loading', function(){
 		// Define the PC's sprite to be the first sprite in the third row of the
 		//  animation sprite map
 		Crafty.sprite(16, 'http://desolate-caverns-4829.herokuapp.com/assets/hunter.png', {
-			spr_player:  [0, 2],
+			spr_player:  [0, 2]
 		}, 0, 2);
 
 		// Define our sounds for later use
-		//Crafty.audio.add({
-		//	knock: ['http://desolate-caverns-4829.herokuapp.com/assets/door_knock_3x.mp3']
-		//});
+		Crafty.audio.add({
+			knock: ['http://desolate-caverns-4829.herokuapp.com/assets/door_knock_3x.mp3']
+		});
 
 		// Draw some text for the player to see in case the file
 		//  takes a noticeable amount of time to load
@@ -118,7 +118,7 @@ Crafty.scene('Loading', function(){
 
 		// Now that our sprites are ready to draw, start the game
 		Crafty.scene('Game');
-	})
+	});
 });
 
 

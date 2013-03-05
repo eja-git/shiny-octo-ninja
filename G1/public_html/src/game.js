@@ -30,7 +30,7 @@ Game = {
 		// Simply start the "Loading" scene to get things going
 		Crafty.scene('Loading');
 	}
-}
+};
 
 Game.start();
 
